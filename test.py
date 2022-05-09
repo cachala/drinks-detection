@@ -15,7 +15,7 @@ if __name__ == '__main__':
     # dataset has four classes 
     num_classes = 4
 
-    path_test = "drinks/labels_test.csv"
+    path_test = "./drinks/labels_test.csv"
     test_dict = label_utils.build_label_dictionary(path_test)
     # use our dataset 
     dataset_test = dataloader.ImageDataset(test_dict, transforms.ToTensor())
