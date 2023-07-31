@@ -51,9 +51,9 @@ def class2index(class_="background"):
 
 
 def load_csv(path):
-    url = 'https://github.com/ricae/Object-Detection/releases/download/v1.1/drinks.zip'
-    response = requests.get(url)
-    open('drinks.zip', 'wb').write(response.content)
+  #  url = 'https://github.com/ricae/Object-Detection/releases/download/v1.1/drinks.zip'
+  #  response = requests.get(url)
+  #  open('drinks.zip', 'wb').write(response.content)
     with zipfile.ZipFile('drinks.zip', 'r') as response:
         response.extractall('./drinks')
     data = []
@@ -86,16 +86,16 @@ def get_label_dictionary(labels, keys):
         if label[-1]==0:
             print("No object labelled as bg:", label[0])
             continue
+        # box coords are float32
         value = value.astype(np.float32)
 
         boxes = [value[0],value[2],value[1],value[3]]
         labels = value[4]
-        image_id = 0
         area = (value[1]-value[0])*(value[3]-value[2])
-        iscrowd = 0
+        
         value = []
-        value = [boxes,labels,image_id,area,iscrowd]
-        # box coords are float32
+        value = [boxes,labels,area]
+        
         # filename is key
         key = label[0]
         # boxes = bounding box coords and class label
@@ -103,14 +103,11 @@ def get_label_dictionary(labels, keys):
         annotations.append(value)
         dictionary[key] = annotations
     # remove dataset entries w/o labels
-    image_id = 0
     for key in keys:
         if len(dictionary[key]) == 0:
             del dictionary[key]
             continue
-        for i in range(len(dictionary[key])):
-            dictionary[key][i][2] = image_id
-        image_id += 1
+ 
     return dictionary
 
 
