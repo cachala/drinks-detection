@@ -31,19 +31,18 @@ class ImageDataset(torch.utils.data.Dataset):
         boxes = []
         labels = []
         area = []
-        iscrowd = []
         for i in range(len(self.dictionary[key])):
             boxes.append(self.dictionary[key][i][0])
             labels.append(self.dictionary[key][i][1])
-            area.append(self.dictionary[key][i][3])
-            iscrowd.append(self.dictionary[key][i][4])
-        image_id = self.dictionary[key][0][2]
-        
+            area.append(self.dictionary[key][i][2])
+    
         boxes = torch.as_tensor(boxes, dtype=torch.float32)
+        labels = torch.as_tensor(labels, dtype=torch.float32)
         labels = torch.as_tensor(labels, dtype=torch.int64)
-        image_id = torch.as_tensor(image_id, dtype=torch.int64)
+        image_id = torch.as_tensor(idx, dtype=torch.int64)
         area = torch.tensor(area)
-        iscrowd = torch.as_tensor(iscrowd, dtype=torch.int64)
+        # suppose all instances are not crowd
+        iscrowd = torch.zeros(len(self.dictionary[key]), dtype=torch.int64)
 
         target = {}
         target["boxes"] = boxes
