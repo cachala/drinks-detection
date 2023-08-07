@@ -1,4 +1,4 @@
-# Drinks detection
+# CoE 197 HW 2: Drinks detection
 Juice / Soda / Water
 
 # References
