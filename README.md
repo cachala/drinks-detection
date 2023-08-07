@@ -1,7 +1,6 @@
 # Drinks detection
 Juice / Soda / Water
 
-To download the dataset, uncomment lines 54-56 in **label_utils.py**
 # References
 
 https://github.com/roatienza/Deep-Learning-Experiments/tree/master#2022-version
