@@ -51,7 +51,7 @@ def class2index(class_="background"):
 
 
 def load_csv(path):
-    url = 'https://github.com/ricae/Object-Detection/releases/download/v1.1/drinks.zip'
+    url = 'https://github.com/cachala/keyword-spotting/releases/download/v1.1/drinks.zip'
     response = requests.get(url)
     open('drinks.zip', 'wb').write(response.content)
     with zipfile.ZipFile('drinks.zip', 'r') as response:
